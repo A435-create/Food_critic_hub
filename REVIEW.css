@@ -1,43 +1,80 @@
-.container {
-    display : flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap : 15px;
-    text-align: center;
-    background-color: bisque;
+* {
     margin: 0;
-    height: 10%;
-    width: 100%;
-
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
-.logo{
-    height: 100px;
-    width: auto;
-    padding-right: 20px;
-    display: block;
-    margin: auto;
+body {
+    background-color: #f4f4f4;
 }
 
-.institute-name{
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #333;
+    padding: 15px 20px;
+}
+
+.logo img {
+    width: 100px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
     font-size: 18px;
-    font-family: 'Merriweather', sans-serif, 'Times New Roman';    
+    transition: 0.3s;
 }
 
-.swach-bharat{
-    height: 60px;
-    width: auto;
-    left: 12px;
+.nav-links a:hover {
+    color: #ffcc00;
 }
 
-.timetable{
-    display: inline-block;
-    padding-right: 50px;
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
 }
 
-.institute-name{
-    height: 10%;
-    width: 100%;
-    background: black;
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: #333;
+    }
+    
+    .nav-links.active {
+        display: flex;
+    }
+    
+    .nav-links li {
+        text-align: center;
+        padding: 15px;
+    }
+    
+    .menu-toggle {
+        display: block;
+    }
+}
+img{
+    height: 100px;
+    width: 00px;
+    /* border: 2px solid white; */
+    border-radius: 50%;
 }
