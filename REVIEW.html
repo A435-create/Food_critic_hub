@@ -7,9 +7,8 @@
     <link rel="stylesheet" href="REVIEW.css" />
   </head>
   <body>
-    <!-- <div class="navbar">EAT, REVIEW, REPEAT</div> -->
     <nav class="navbar">
-      <div class="navbar-text">EAT, REVIEW, REPEAT</div>
+      <div class="navbar-text">EAT-REVIEW-REPEAT</div>
       <div class="logo">
         <img
           src="Flux_Dev_Create_a_modern_logo_for_the_Food_Critics_Hub_food_re_1__2_-removebg-preview.png"
@@ -25,11 +24,81 @@
       <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
     </nav>
 
+    <h1>Select a Meal Category</h1>
+    <div class="container">
+        <div class="card" onclick="showMenu('Breakfast')">
+            <img src="https://th.bing.com/th/id/OIP.NAXGUh4TBNgFBvayMJxbHgHaFN?rs=1&pid=ImgDetMain" alt="Breakfast">
+            Breakfast
+        </div>
+        <div class="card" onclick="showMenu('Lunch')">
+            <img src="https://th.bing.com/th/id/OIP.0ttqHENYnX1v1b14Id5I7gAAAA?rs=1&pid=ImgDetMain" alt="Lunch">
+            Lunch
+        </div>
+        <div class="card" onclick="showMenu('Snacks')">
+            <img src="https://thumbs.dreamstime.com/z/indian-breakfast-dish-poha-indian-breakfast-dish-poha-also-know-as-pohe-aalu-poha-made-up-beaten-rice-flattened-rice-158510830.jpg" alt="Snacks">
+            Snacks
+        </div>
+        <div class="card" onclick="showMenu('Dinner')">
+            <img src="https://thespicemess.com/wp-content/uploads/2020/08/Daal-2-1024x683.jpg" alt="Dinner">
+            Dinner
+        </div>
+        
+    </div>
+    
+    <div class="meal-list" id="mealList">
+        <h2 id="mealTitle"></h2>
+        <p class="rating">DAILY Average Rating : <span id="averageRating">-</span>/5</p>
+        <div id="mealItems"></div>
+        <button onclick="submitreview()">SUBMIT REVIEW</button>
+    </div>
+
+
+   
     <script>
-      function toggleMenu() {
-        const nav = document.querySelector(".nav-links");
-        nav.classList.toggle("active");
-      }
+    //   function toggleMenu() {
+    //     const nav = document.querySelector(".nav-links");
+    //     nav.classList.toggle("active");
+    //   }
+      const meals = {
+            Breakfast: ['Pancakes', 'Omelette', 'Fruit Salad'],
+            Lunch: ['Grilled Chicken', 'Rice & Beans', 'Vegetable Salad'],
+            Snacks: ['Sandwich', 'French Fries', 'Smoothie'],
+            Dinner: ['Pasta', 'Grilled Fish', 'Steamed Vegetables']
+        };
+
+        const mealRatings = {
+            Breakfast: 4.2,
+            Lunch: 3.8,
+            Snacks: 4.5,
+            Dinner: 4.0
+        };
+        function showMenu(mealType) {
+            const mealList = document.getElementById('mealList');
+            mealList.style.display = 'block';
+            setTimeout(() => mealList.classList.add('show'), 10);
+            document.getElementById('mealTitle').innerText = `Menu for ${mealType}`;
+            document.getElementById('averageRating').innerText = mealRatings[mealType] || "-";
+            const mealItemsContainer = document.getElementById('mealItems');
+            mealItemsContainer.innerHTML = '';
+            
+            meals[mealType].forEach(item => {
+                mealItemsContainer.innerHTML += `
+                    <div>
+                        <h3>${item}</h3>
+                        <label>Taste (1-5):</label>
+                        <input type="number" min="1" max="5"><br>
+                        <label>Hygiene (1-5):</label>
+                        <input type="number" min="1" max="5"><br>
+                        <label>Suggestions:</label>
+                        <textarea rows="2"></textarea><br><br>
+                    </div>
+                `;
+            });
+        }
+
+        function submitreview(){
+            alert("Your review has been submitted. Thank you!");
+        }
     </script>
   </body>
 </html>
