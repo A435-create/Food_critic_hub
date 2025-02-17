@@ -10,10 +10,7 @@
     <nav class="navbar">
       <div class="navbar-text">EAT-REVIEW-REPEAT</div>
       <div class="logo">
-        <img
-          src="Flux_Dev_Create_a_modern_logo_for_the_Food_Critics_Hub_food_re_1__2_-removebg-preview.png"
-          alt="Logo"
-        />
+        <img src="Flux_Dev_Create_a_modern_logo_for_the_Food_Critics_Hub_food_re_1__2_-removebg-preview.png" alt="Logo" />
       </div>
       <ul class="nav-links">
         <li><a href="REVIEW.html">Home</a></li>
@@ -24,7 +21,17 @@
       <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
     </nav>
 
-    <h1 style="color: white;">Select a Meal Category</h1>
+    <h1 style="color: white;">Select a Day and Meal Category</h1>
+    <!-- <label for="daySelect">Choose a Day:</label> -->
+    <select id="daySelect">
+        <option value="Monday">Monday</option>
+        <option value="Tuesday">Tuesday</option>
+        <option value="Wednesday">Wednesday</option>
+        <option value="Thursday">Thursday</option>
+        <option value="Friday">Friday</option>
+        <option value="Saturday">Saturday</option>
+        <option value="Sunday">Sunday</option>
+    </select>
     <div class="container">
         <div class="card" onclick="showMenu('Breakfast')">
             <img src="https://th.bing.com/th/id/OIP.NAXGUh4TBNgFBvayMJxbHgHaFN?rs=1&pid=ImgDetMain" alt="Breakfast">
@@ -42,7 +49,6 @@
             <img src="https://thespicemess.com/wp-content/uploads/2020/08/Daal-2-1024x683.jpg" alt="Dinner">
             Dinner
         </div>
-        
     </div>
     
     <div class="meal-list" id="mealList">
@@ -52,39 +58,79 @@
         <button onclick="submitreview()">SUBMIT REVIEW</button>
     </div>
 
-
-   
     <script>
       const meals = {
-            Breakfast: ['Pancakes', 'Omelette', 'Fruit Salad'],
-            Lunch: ['Grilled Chicken', 'Rice & Beans', 'Vegetable Salad'],
-            Snacks: ['Sandwich', 'French Fries', 'Smoothie'],
-            Dinner: ['Pasta', 'Grilled Fish', 'Steamed Vegetables']
+            Monday: {
+                Breakfast: ['Pancakes', 'Omelette', 'Fruit Salad'],
+                Lunch: ['Grilled Chicken', 'Rice & Beans', 'Vegetable Salad'],
+                Snacks: ['Sandwich', 'French Fries', 'Smoothie'],
+                Dinner: ['Pasta', 'Grilled Fish', 'Steamed Vegetables']
+            },
+            Tuesday: {
+                Breakfast: ['Waffles', 'Scrambled Eggs', 'Yogurt'],
+                Lunch: ['Tacos', 'Quinoa Salad', 'Soup'],
+                Snacks: ['Nachos', 'Banana Bread', 'Milkshake'],
+                Dinner: ['Pizza', 'Caesar Salad', 'Garlic Bread']
+            },
+            Wednesday: {
+                Breakfast: ['French Toast', 'Boiled Eggs', 'Berries'],
+                Lunch: ['Chicken Curry', 'Rice', 'Salad'],
+                Snacks: ['Popcorn', 'Granola Bars', 'Iced Coffee'],
+                Dinner: ['Biryani', 'Raita', 'Paneer Curry']
+            },
+            Thursday: {
+                Breakfast: ['Bagels', 'Avocado Toast', 'Smoothie Bowl'],
+                Lunch: ['Burgers', 'Fries', 'Coleslaw'],
+                Snacks: ['Spring Rolls', 'Cupcakes', 'Green Tea'],
+                Dinner: ['Noodles', 'Stir-fried Veggies', 'Tofu Curry']
+            },
+            Friday: {
+                Breakfast: ['Cereal', 'Milk', 'Banana'],
+                Lunch: ['Fish Tacos', 'Guacamole', 'Beans'],
+                Snacks: ['Samosas', 'Fruit Chaat', 'Cold Coffee'],
+                Dinner: ['Steak', 'Mashed Potatoes', 'Corn']
+            },
+            Saturday: {
+                Breakfast: ['Muffins', 'Chia Pudding', 'Orange Juice'],
+                Lunch: ['Shawarma', 'Pita Bread', 'Hummus'],
+                Snacks: ['Cheese Platter', 'Crispy Chips', 'Lemonade'],
+                Dinner: ['Lasagna', 'Garlic Knots', 'Tomato Soup']
+            },
+            Sunday: {
+                Breakfast: ['Donuts', 'Coffee', 'Scrambled Tofu'],
+                Lunch: ['BBQ Chicken', 'Baked Potatoes', 'Grilled Veggies'],
+                Snacks: ['Ice Cream', 'Chocolates', 'Milkshake'],
+                Dinner: ['Dal Makhani', 'Butter Naan', 'Mango Lassi']
+            }
         };
 
         const mealRatings = {
-            Breakfast: 4.2,
-            Lunch: 3.8,
-            Snacks: 4.5,
-            Dinner: 4.0
+            Breakfast: 0.0,
+            Lunch: 0.0,
+            Snacks: 0.0,
+            Dinner: 0.0
         };
+
         function showMenu(mealType) {
+            const selectedDay = document.getElementById('daySelect').value;
             const mealList = document.getElementById('mealList');
             mealList.style.display = 'block';
             setTimeout(() => mealList.classList.add('show'), 10);
-            document.getElementById('mealTitle').innerText = `Menu for ${mealType}`;
+            document.getElementById('mealTitle').innerText = `Menu for ${mealType} on ${selectedDay}`;
             document.getElementById('averageRating').innerText = mealRatings[mealType] || "-";
             const mealItemsContainer = document.getElementById('mealItems');
             mealItemsContainer.innerHTML = '';
             
-            meals[mealType].forEach(item => {
+            const selectedMeals  = meals[selectedDay][mealType] || [];
+
+
+            selectedMeals.forEach(item => {
                 mealItemsContainer.innerHTML += `
                     <div>
                         <h3>${item}</h3>
                         <label>Taste (1-5):</label>
                         <input type="number" min="1" max="5"><br>
-                        <label>Hygiene (1-5):</label>
-                        <input type="number" min="1" max="5"><br>
+                        
                         <label>Suggestions:</label>
                         <textarea rows="2"></textarea><br><br>
                     </div>
