@@ -14,7 +14,28 @@ body {
   /* background-color: #f4f4f4; */
   margin: 0;
   padding: 0;
+  
 }
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(135deg, #0f3443, #2fd18e);
+  color: white;
+  text-align: center;
+  padding: 15px 20px;
+  font-size: 14px;
+  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.2);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  z-index: 1000;
+}
+.content{
+  padding-bottom : 80px;
+  transition: padding-bottom 0.3s ease-in-out;
+}
+
 
 .navbar {
   display: flex;
@@ -176,7 +197,7 @@ h1 {
   transform: scale(0.9);
   transition: opacity 0.5s ease, transform 0.5s ease;
   background-color: #2fd18e;
-  
+  margin-bottom: 120px;  
 }
 #daySelect {
   padding: 20px;
